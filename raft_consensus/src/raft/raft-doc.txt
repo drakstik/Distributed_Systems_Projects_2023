@@ -1,0 +1,242 @@
+package raft // import "."
+
+
+CONSTANTS
+
+const CANDIDATE = "CANDIDATE"
+const ERROR_CREATING_NEW_RAFT_PEER = 0
+    Raft global constants
+
+const ERROR_IMPORTING_PACKAGE = "ASKFORHELP"
+const FOLLOWER = "FOLLOWER"
+const LEADER = "LEADER"
+const RAFT_HEARTBEAT = 150 * time.Millisecond
+    Start of RAFT Constants
+
+const RAFT_IP_ADDRESS = "127.0.0.1:"
+
+VARIABLES
+
+var GlobalMutex sync.Mutex
+var debugStart time.Time
+    PrettyPrint logic
+
+var debugVerbosity int
+var error_message = []string{
+
+	"Error Creating New Raft Peer",
+}
+
+FUNCTIONS
+
+func RandomElectionTimeoutDuration() time.Duration
+    Returns a random time duration between 500-650ms
+
+func getVerbosity() int
+    Retrieve the verbosity level from an environment variable; Used by
+    PrettyPrint
+
+func init()
+func min(a, b int) int
+    Given two ints a and b, return the smaller int
+
+func prettyPrint(topic logTopic, format string, a ...interface{})
+
+TYPES
+
+type LogEntry struct {
+	Term        int // Term this entry was created
+	Command     int
+	Index       int // Starting from 1
+	IsCommitted bool
+	commitCount int
+}
+    This is an entry that is logged onto the Raft network
+
+func removeElements(slice []LogEntry, prevIndex int) []LogEntry
+    Remove entries in peer's log, from prevIndex onward, used in
+    AppendEntries().
+
+type RaftInterface struct {
+	RequestVote     func(term int, candidateId int, lastLogIndex int, lastLogTerm int) (int, bool, rpc.RemoteObjectError)                                        // TODO: define function type
+	AppendEntries   func(leaderTerm int, leaderID int, prevLogIndex int, prevLogTerm int, entry []LogEntry, leaderCommit int) (int, bool, rpc.RemoteObjectError) // TODO: define function type
+	GetCommittedCmd func(int) (int, rpc.RemoteObjectError)
+	GetStatus       func() (StatusReport, rpc.RemoteObjectError)
+	NewCommand      func(int) (StatusReport, rpc.RemoteObjectError)
+}
+    RaftInterface -- this is the "service interface" that is implemented by
+    each Raft peer using the remote library from Lab 1. it supports five remote
+    methods that you must define and implement.
+
+type RaftPeer struct {
+	port     int
+	ID       int
+	numPeers int // Number of known peers
+	role     string
+	active   bool // True if peer is active
+	service  *rpc.Service
+
+	peerStubs map[int]*RaftInterface // Array of stub peers
+	Mutex     sync.Mutex             // This peer's mutex
+
+	/* Persistent state */
+	currentTerm int
+	votedFor    int // -1 if peer has not voted for anyone
+
+	leaderId int // The ID of this peer's leader
+
+	// Channel used to signal the end/start of a heartbeat timer
+	heartbeatChannel chan bool
+	// Channel used to signal deactivation of a peer
+	killChannel chan bool
+
+	logEntries []LogEntry // This peer's logs
+
+	/* These fields are set/updated by AppendEntry() */
+	lastLogTerm int
+
+	/* This is volatile state, which can be inconsistent with agreed upon state */
+	commitIndex int // Our latest known committed index
+
+	lastLogIndex int
+	lastCommit   int
+	nextIndex    []int // Initialized as 1 for all peers
+	matchIndex   []int
+}
+    A struct defining a unique peer in Raft. A RaftPeer implements all the
+    functions in the RaftInterface. A RaftPeer can be created, activated and
+    deactivated by the controller.
+
+func NewRaftPeer(port int, id int, num int) *RaftPeer
+    `NewRaftPeer` -- this method should create an instance of the above struct
+    and return a pointer to it back to the Controller, which calls this method.
+    this allows the Controller to create, interact with, and control the
+    configuration as needed. this method takes three parameters: -- port: this
+    is the service port number where this Raft peer will listen for incoming
+    messages -- id: this is the ID (or index) of this Raft peer in the peer
+    group, ranging from 0 to num-1 -- num: this is the number of Raft peers in
+    the peer group (num > id)
+
+func (peer *RaftPeer) Activate()
+    `Activate` -- this method operates on your Raft peer struct and initiates
+    functionality to allow the Raft peer to interact with others. before the
+    peer is activated, it can have internal algorithm state, but it cannot make
+    remote calls using its stubs or receive remote calls using its underlying
+    remote.Service interface. in essence, when not activated, the Raft peer is
+    "sleeping" from the perspective of any other Raft peer.
+
+    this method is used exclusively by the Controller whenever it needs to "wake
+    up" the Raft peer and allow it to start interacting with other Raft peers.
+    this is used to emulate connecting a new peer to the network or recovery of
+    a previously failed peer.
+
+    when this method is called, the Raft peer should do whatever is necessary
+    to enable its remote.Service interface to support remote calls from other
+    Raft peers as soon as the method returns (i.e., if it takes time for the
+    remote.Service to start, this method should not return until that happens).
+    the method should not otherwise block the Controller, so it may be useful to
+    spawn go routines from this method to handle the on-going operation of the
+    Raft peer until the remote.Service stops.
+
+    given an instance `rf` of your Raft peer struct, the Controller will
+    call this method as `rf.Activate()`, so you should define this method
+    accordingly. NOTE: this is _not_ a remote call using the `remote.Service`
+    interface of the Raft peer. it uses direct method calls from the Controller,
+    and is used purely for the purposes of the test code. you should not be
+    using this method for any messaging between Raft peers.
+
+func (peer *RaftPeer) AppendEntries(leaderTerm int, leaderID int, prevLogIndex int, prevLogTerm int, entry []LogEntry, commitIndex int) (int, bool, rpc.RemoteObjectError)
+
+func (leader *RaftPeer) CallAppendEntries(peerId int, entryIndex int)
+    Wrapper function ran in go routines to call AppendEntries on stubs,
+    repeatedly, until leader gets a valid response from stub peer, gets
+    deactivated or switches roles.
+
+func (peer *RaftPeer) Deactivate()
+    `Deactivate` -- this method performs the "inverse" operation to `Activate`,
+    namely to emulate disconnection / failure of the Raft peer. when called,
+    the Raft peer should effectively "go to sleep", meaning it should stop its
+    underlying remote.Service interface, including shutting down the listening
+    socket, causing any further remote calls to this Raft peer to fail due to
+    connection error. when deactivated, a Raft peer should not make or receive
+    any remote calls, and any execution of the Raft protocol should effectively
+    pause. however, local state should be maintained, meaning if a Raft node was
+    the LEADER when it was deactivated, it should still believe it is the leader
+    when it reactivates.
+
+    given an instance `rf` of your Raft peer struct, the Controller will
+    call this method as `rf.Deactivate()`, so you should define this method
+    accordingly. Similar notes / details apply here as with `Activate`
+
+    TODO: implement the `Deactivate` method
+
+func (peer *RaftPeer) Dispatcher()
+    Dispatcher deals with a peer's deactivation, timeouts and corresponding role
+    switches, using channels.
+
+func (peer *RaftPeer) GetCommittedCmd(index int) (int, rpc.RemoteObjectError)
+    GetCommittedCmd -- called (only) by the Controller. this method provides
+    an input argument `index`. if the Raft peer has a log entry at the given
+    `index`, and that log entry has been committed (per the Raft algorithm),
+    then the command stored in the log entry should be returned to the
+    Controller. otherwise, the Raft peer should return the value 0, which is not
+    a valid command number and indicates that no committed log entry exists at
+    that index
+
+func (peer *RaftPeer) GetStatus() (StatusReport, rpc.RemoteObjectError)
+    GetStatus -- this is a remote call that is used by the Controller to collect
+    status information
+
+        about the Raft peer.  the struct type that it returns is defined above, and it must be implemented
+        as given, or the Controller and test code will not function correctly.  This method takes no arguments and is essentially
+        a "getter" for the state of the Raft peer, including the Raft peer's current term, current last
+        log index, role in the Raft algorithm, and total number of remote calls handled since starting.
+        the method returns a `StatusReport` struct as defined at the top of this file.
+
+func (candidate *RaftPeer) LeaderElection()
+    This function executes when election timer runs out
+
+func (peer *RaftPeer) NewCommand(command int) (StatusReport, rpc.RemoteObjectError)
+    NewCommand -- called (only) by the Controller. this method emulates
+    submission of a new command
+
+        by a Raft client to this Raft peer, which should be handled and processed according to the rules
+        of the Raft algorithm.  once handled, the Raft peer should return a `StatusReport` struct with
+        the updated status after the new command was handled.
+
+func (peer *RaftPeer) RequestVote(candidateTerm int, candidateId int, lastLogIndex int, lastLogTerm int) (int, bool, rpc.RemoteObjectError)
+
+func (leader *RaftPeer) SendHeartbeat(entryIndex int)
+    Append Entries to all the Followers
+
+type StatusReport struct {
+	Index     int
+	Term      int
+	Leader    bool
+	CallCount int
+}
+    StatusReport struct sent from Raft node to Controller in response to command
+    and status requests. this is needed by the Controller, so do not change it.
+    make sure you give it to the Controller when requested
+
+type logTopic string
+
+const (
+	Client    logTopic = "CLNT"
+	Candidate logTopic = "CNDT"
+	Commit    logTopic = "CMIT"
+	Drop      logTopic = "DROP"
+	Error     logTopic = "ERRO"
+	Info      logTopic = "INFO"
+	Leader    logTopic = "LEAD"
+	Log       logTopic = "LOG1"
+	Log2      logTopic = "LOG2"
+	Control   logTopic = "CTRL"
+	Response  logTopic = "RESP"
+	Term      logTopic = "TERM"
+	Test      logTopic = "TEST"
+	Timer     logTopic = "TIMR"
+	Trace     logTopic = "TRCE"
+	Vote      logTopic = "VOTE"
+	Peer      logTopic = "PEER"
+)

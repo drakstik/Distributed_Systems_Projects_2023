@@ -1,0 +1,15 @@
+package helpers // import "project/Helpers"
+
+
+FUNCTIONS
+
+func Check(err error) bool
+    Returns true if the error exists and false if it does not
+
+func GetPorts(filepath string) []string
+    Attempt to read from the NodeList filepath.
+
+func RegisterPort(port string, filepath string)
+    1. Open the file containing the list of ports registered in the Blockchain
+    2. Add the new port to the list 3. Close the file
+

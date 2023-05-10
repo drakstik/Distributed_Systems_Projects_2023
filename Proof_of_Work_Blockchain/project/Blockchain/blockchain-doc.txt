@@ -1,0 +1,30 @@
+package blockchain // import "project/Blockchain"
+
+
+CONSTANTS
+
+const NON_TRIVIAL int = 4
+
+FUNCTIONS
+
+func PrintBlockchain(blockchain Blockchain)
+    Print a blockchain's blocks and fields to the console
+
+
+TYPES
+
+type Blockchain struct {
+	Blocks []*block.Block `json:"blocks"`
+}
+    A blockchain is an array of blocks.
+
+    Blocks are logically chained by the prevBlock has in each new block,
+    with the Genesis block as as the root of the blockchain.
+
+func NewBlockchain(known_ports []string) (*Blockchain, bool)
+    When there are 4 peers, a new blockchain should be automatically created.
+
+func (bc *Blockchain) AddBlock(data string)
+    /* Creates a new block using the given data and appends it to the
+    blockchain. */
+

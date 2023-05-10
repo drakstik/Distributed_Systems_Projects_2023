@@ -1,0 +1,132 @@
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+Response to registration: {[]}
+NEW ROOT: [file{}]
+NEW ROOT: [file{} directory{file}]
+NEW ROOT: [file{} directory{file, another_file}]
+NEW ROOT: [file{} directory{file, another_file} another_directory{file}]
+Response to registration: {[]}
+Invalid Path: /file
+Invalid Path: /directory/file
+NEW ROOT: [file{} directory{file, another_file} another_directory{file, another_file}]
+Response to registration: {[/file /directory/file]}
+Invalid Path: /directory
+NEW ROOT: [file{} directory{file, another_file} another_directory{file, another_file} another_file{}]
+Response to registration: {[/directory]}
+NEW ROOT: [file{} directory{file, another_file} another_directory{file, another_file} another_file{} {}]
+Response to registration: {[]}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+NEW ROOT: [file{}]
+NEW ROOT: [file{} directory{file}]
+NEW ROOT: [file{} directory{file, another_file}]
+Response to registration: {[]}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+NEW ROOT: [directory{file}]
+Response to registration: {[]}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+NEW ROOT: [file1{}]
+NEW ROOT: [file1{} directory{file2}]
+Response to registration: {[]}
+NEW ROOT: [file1{} directory{file2, file3}]
+NEW ROOT: [file1{} directory{file2, file3} another_directory{file4}]
+Invalid Path: /file1
+Response to registration: {[/file1]}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+NEW ROOT: [directory{file1}]
+NEW ROOT: [directory{file1, file2}]
+Response to registration: {[]}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+NEW ROOT: [file{}]
+Response to registration: {[]}
+Response to registration: {[]}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+NEW ROOT: [file{}]
+NEW ROOT: [file{} directory{file}]
+Response to registration: {[]}
+NEW ROOT: [file{} directory{file, file2}]
+Response to registration: {[]}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+Response to registration: {[]}
+NEW ROOT: [file{}]
+NEW ROOT: [file{} directory{file}]
+NEW ROOT: [file{} directory{file, another_file}]
+NEW ROOT: [file{} directory{file, another_file} another_directory{file}]
+Response to registration: {[]}
+Invalid Path: /file
+Invalid Path: /directory/file
+NEW ROOT: [file{} directory{file, another_file} another_directory{file, another_file}]
+Response to registration: {[/file /directory/file]}
+Invalid Path: /directory
+NEW ROOT: [file{} directory{file, another_file} another_directory{file, another_file} another_file{}]
+Response to registration: {[/directory]}
+NEW ROOT: [file{} directory{file, another_file} another_directory{file, another_file} another_file{} {}]
+Response to registration: {[]}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+NEW ROOT: [file{}]
+NEW ROOT: [file{} directory{file}]
+NEW ROOT: [file{} directory{file, another_file}]
+Response to registration: {[]}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+NEW ROOT: [directory{file}]
+Response to registration: {[]}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+NEW ROOT: [file1{}]
+NEW ROOT: [file1{} directory{file2}]
+Response to registration: {[]}
+NEW ROOT: [file1{} directory{file2, file3}]
+NEW ROOT: [file1{} directory{file2, file3} another_directory{file4}]
+Invalid Path: /file1
+Response to registration: {[/file1]}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+NEW ROOT: [directory{file1}]
+NEW ROOT: [directory{file1, file2}]
+Response to registration: {[]}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+NEW ROOT: [file{}]
+Response to registration: {[]}
+Response to registration: {[]}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4445 for Registration Requests...
+NEW ROOT: [file{}]
+NEW ROOT: [file{} directory{file}]
+Response to registration: {[]}
+NEW ROOT: [file{} directory{file, file2}]
+Response to registration: {[]}

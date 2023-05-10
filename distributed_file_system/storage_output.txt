@@ -1,0 +1,410 @@
+Storage Server is starting
+[2233 2234 2235 /tmp/ds0]
+Storage: Sending HTTP Request
+Found File : /tmp/ds0/file3
+Found File : /tmp/ds0/prune/dir1/file
+Found File : /tmp/ds0/prune/dir2/file
+Found File : /tmp/ds0/subdirectory/file1
+Found File : /tmp/ds0/subdirectory/file2
+Found File : /tmp/ds0/subdirectory/subdirectory2/file1
+Current List of Files : [/file3 /prune/dir1/file /prune/dir2/file /subdirectory/file1 /subdirectory/file2 /subdirectory/subdirectory2/file1]
+"http://127.0.0.1:2235/register"
+Registration Response: {"files":["/subdirectory/file1","/file3","/prune/dir1/file","/prune/dir2/file"]}
+Registration Complete, Sending Files for Deletion {"files":["/subdirectory/file1","/file3","/prune/dir1/file","/prune/dir2/file"]}
+Decoded =   {[/subdirectory/file1 /file3 /prune/dir1/file /prune/dir2/file]}
+Storage: Deleting these file from /tmp/ds0:{[/subdirectory/file1 /file3 /prune/dir1/file /prune/dir2/file]}Deleted File /tmp/ds0/subdirectory/file1
+Deleted File /tmp/ds0/file3
+Deleted File /tmp/ds0/prune/dir1/file
+Deleted File /tmp/ds0/prune/dir2/file
+Empty Directory List : [/tmp/ds0/prune/dir1 /tmp/ds0/prune/dir2]
+Directory deleted : /tmp/ds0/prune/dir1
+Directory deleted : /tmp/ds0/prune/dir2
+Empty Directory List : [/tmp/ds0/prune]
+Directory deleted : /tmp/ds0/prune
+Empty Directory List : []
+Listening on  127.0.0.1:2233
+Listening on  127.0.0.1:2234
+Storage Server is starting
+[2233 2234 2235 /tmp/ds0]
+Storage: Sending HTTP Request
+Found File : /tmp/ds0/file3
+Found File : /tmp/ds0/subdirectory/file1
+Found File : /tmp/ds0/subdirectory/file2
+Found File : /tmp/ds0/subdirectory/subdirectory2/file1
+Current List of Files : [/file3 /subdirectory/file1 /subdirectory/file2 /subdirectory/subdirectory2/file1]
+"http://127.0.0.1:2235/register"
+Registration Response: {"files":[]}
+Registration Complete, Sending Files for Deletion {"files":[]}
+Decoded =   {[]}
+Storage: Deleting these file from /tmp/ds0:{[]}Empty Directory List : []
+Listening on  127.0.0.1:2233
+Listening on  127.0.0.1:2234
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Client Requested File Information for : %v
+ /tmp/ds0/subdirectory/file2
+Storage Size Response: {0}
+Storage Server Response: {IllegalArgumentException No arguments passed in the API request body}
+Storage: New SR Request: {/absent 0 0}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage: New SR Request: {/subdirectory 0 0}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage: New SR Request: {/subdirectory/file2 0 0}
+Storage Read Response: {}
+Storage: New SR Request: { 0 0}
+Storage Server Response: {IllegalArgumentException No arguments passed in the API request body}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage Server Response: {IllegalArgumentException No arguments passed in the API request body}
+Storage: Request Body: {/subdirectory/file1 0 dGVzdCBkYXRh}
+Storage Write Response: {true}
+Client Requested File Information for : %v
+ /tmp/ds0/subdirectory/file1
+Storage Size Response: {9}
+Storage: New SR Request: {/subdirectory/file1 0 9}
+Storage Read Response: {dGVzdCBkYXRh}
+Storage: New SR Request: {/subdirectory/file1 -1 10}
+Storage Response: {IndexOutOfBoundsException Invalid Offset value supplied in Storage Write Request}
+Storage: New SR Request: {/subdirectory/file1 0 10}
+Storage Response: {IndexOutOfBoundsException Invalid Offset value supplied in Storage Write Request}
+Storage: New SR Request: {/subdirectory/file1 9 9}
+Storage Response: {IndexOutOfBoundsException Invalid Offset value supplied in Storage Write Request}
+Storage: New SR Request: {/subdirectory/file1 0 -9}
+Storage Response: {IndexOutOfBoundsException Invalid Offset value supplied in Storage Write Request}
+Storage Response: {IndexOutOfBoundsException Invalid Offset value supplied in Storage Write Request}
+Storage: Request Body: {/subdirectory/file1 10 dGVzdCBkYXRh}
+Storage Write Response: {true}
+Client Requested File Information for : %v
+ /tmp/ds0/subdirectory/file1
+Storage Size Response: {19}
+Storage Server is starting
+[2233 2234 2235 /tmp/ds0]
+Storage: Sending HTTP Request
+Found File : /tmp/ds0/file3
+Found File : /tmp/ds0/subdirectory/file1
+Found File : /tmp/ds0/subdirectory/file2
+Found File : /tmp/ds0/subdirectory/subdirectory2/file1
+Current List of Files : [/file3 /subdirectory/file1 /subdirectory/file2 /subdirectory/subdirectory2/file1]
+"http://127.0.0.1:2235/register"
+Registration Response: {"files":[]}
+Registration Complete, Sending Files for Deletion {"files":[]}
+Decoded =   {[]}
+Storage: Deleting these file from /tmp/ds0:{[]}Empty Directory List : []
+Listening on  127.0.0.1:2233
+Listening on  127.0.0.1:2234
+Storage Server Response: {IllegalArgumentException No arguments passed in the API request body}
+Storage: Error Creating New File: File with same name already exists
+Storage Create Response: {false}
+Storage: Error Creating New File: File with same name already exists
+Storage Create Response: {false}
+Storage Create Response: {true}
+Storage: New SR Request: {/dir/dir/file 0 0}
+Storage Read Response: {}
+Storage: Request Body: {/dir/dir/file 0 dGVzdA==}
+Storage Write Response: {true}
+Storage Create Response: {true}
+Storage: New Delete Request: {}
+Storage Server Response: {IllegalArgumentException No arguments passed in the API request body}
+Storage: New Delete Request: {/}
+Storage: Error Deleting File: remove /tmp/ds0: directory not empty
+Empty Directory List : []
+Storage Delete Response: {false}
+Storage: New Delete Request: {/absent-file}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage: New Delete Request: {/file3}
+Empty Directory List : []
+Storage Delete Response: {true}
+Storage: New Delete Request: {/subdirectory}
+Empty Directory List : []
+Storage Delete Response: {true}
+Storage Server is starting
+[2233 2234 2235 /tmp/ds0]
+Storage: Sending HTTP Request
+Found File : /tmp/ds0/file4
+Current List of Files : [/file4]
+"http://127.0.0.1:2235/register"
+Registration Response: {"files":[]}
+Registration Complete, Sending Files for Deletion {"files":[]}
+Decoded =   {[]}
+Storage: Deleting these file from /tmp/ds0:{[]}Empty Directory List : []
+Listening on  127.0.0.1:2233
+Listening on  127.0.0.1:2234
+Storage Server is starting
+[3333 3334 2235 /tmp/ds1]
+Storage: Sending HTTP Request
+Found File : /tmp/ds1/file4
+Found File : /tmp/ds1/replicate/file5
+Current List of Files : [/file4 /replicate/file5]
+"http://127.0.0.1:2235/register"
+Registration Response: {"files":[]}
+Registration Complete, Sending Files for Deletion {"files":[]}
+Decoded =   {[]}
+Storage: Deleting these file from /tmp/ds1:{[]}Empty Directory List : []
+Listening on  127.0.0.1:3333
+Listening on  127.0.0.1:3334
+Storage: New Copy Request: { http://127.0.0.1: 3333}
+Storage Server Response: {IllegalArgumentException No arguments passed in the API request body}
+Storage: New Copy Request: {/absent-file http://127.0.0.1: 3333}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage Size Response: {"exception_type":"FileNotFoundException","exception_info":"The file does not exist on storage server"}
+
+Storage Size Response Code: 404
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage: New Copy Request: {/replicate http://127.0.0.1: 3333}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage Size Response: {"exception_type":"FileNotFoundException","exception_info":"The file does not exist on storage server"}
+
+Storage Size Response Code: 404
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage: Request Body: {/replicate/file5 0 ZGF0YQ==}
+Storage Write Response: {true}
+Storage: New Copy Request: {/replicate/file5 http://127.0.0.1: 3333}
+Client Requested File Information for : %v
+ /tmp/ds1/replicate/file5
+Storage Size Response: {4}
+Storage Size Response: {"size":4}
+
+Storage Size Response Code: 200
+Storage: New SR Request: {/replicate/file5 0 4}
+Storage Read Response: {ZGF0YQ==}
+Storage: Response Body: {ZGF0YQ==}
+Storage: Response base64RequestString: data
+Storage: Response Normal String: data
+Empty Directory List : []
+Storage: Creating/Overwriting File /tmp/ds0/replicate/file5
+Storage Copy Response: {true}
+Client Requested File Information for : %v
+ /tmp/ds0/replicate/file5
+Storage Size Response: {4}
+Storage: New SR Request: {/replicate/file5 0 4}
+Storage Read Response: {ZGF0YQ==}
+Storage: Request Body: {/file4 0 b2xkIGRhdGE=}
+Storage Write Response: {true}
+Storage: Request Body: {/file4 0 ZGF0YQ==}
+Storage Write Response: {true}
+Storage: New Copy Request: {/file4 http://127.0.0.1: 3333}
+Client Requested File Information for : %v
+ /tmp/ds1/file4
+Storage Size Response: {4}
+Storage Size Response: {"size":4}
+
+Storage Size Response Code: 200
+Storage: New SR Request: {/file4 0 4}
+Storage Read Response: {ZGF0YQ==}
+Storage: Response Body: {ZGF0YQ==}
+Storage: Response base64RequestString: data
+Storage: Response Normal String: data
+Storage: File /tmp/ds0/file4 already existed, removing ... :
+Empty Directory List : []
+Storage: Creating/Overwriting File /tmp/ds0/file4
+Storage Copy Response: {true}
+Client Requested File Information for : %v
+ /tmp/ds0/file4
+Storage Size Response: {4}
+Storage: New SR Request: {/file4 0 4}
+Storage Read Response: {ZGF0YQ==}
+Storage Server is starting
+[2233 2234 2235 /tmp/ds0]
+Storage: Sending HTTP Request
+Found File : /tmp/ds0/file3
+Found File : /tmp/ds0/prune/dir1/file
+Found File : /tmp/ds0/prune/dir2/file
+Found File : /tmp/ds0/subdirectory/file1
+Found File : /tmp/ds0/subdirectory/file2
+Found File : /tmp/ds0/subdirectory/subdirectory2/file1
+Current List of Files : [/file3 /prune/dir1/file /prune/dir2/file /subdirectory/file1 /subdirectory/file2 /subdirectory/subdirectory2/file1]
+"http://127.0.0.1:2235/register"
+Registration Response: {"files":["/subdirectory/file1","/file3","/prune/dir1/file","/prune/dir2/file"]}
+Registration Complete, Sending Files for Deletion {"files":["/subdirectory/file1","/file3","/prune/dir1/file","/prune/dir2/file"]}
+Decoded =   {[/subdirectory/file1 /file3 /prune/dir1/file /prune/dir2/file]}
+Storage: Deleting these file from /tmp/ds0:{[/subdirectory/file1 /file3 /prune/dir1/file /prune/dir2/file]}Deleted File /tmp/ds0/subdirectory/file1
+Deleted File /tmp/ds0/file3
+Deleted File /tmp/ds0/prune/dir1/file
+Deleted File /tmp/ds0/prune/dir2/file
+Empty Directory List : [/tmp/ds0/prune/dir1 /tmp/ds0/prune/dir2]
+Directory deleted : /tmp/ds0/prune/dir1
+Directory deleted : /tmp/ds0/prune/dir2
+Empty Directory List : [/tmp/ds0/prune]
+Directory deleted : /tmp/ds0/prune
+Empty Directory List : []
+Listening on  127.0.0.1:2233
+Listening on  127.0.0.1:2234
+Storage Server is starting
+[2233 2234 2235 /tmp/ds0]
+Storage: Sending HTTP Request
+Found File : /tmp/ds0/file3
+Found File : /tmp/ds0/subdirectory/file1
+Found File : /tmp/ds0/subdirectory/file2
+Found File : /tmp/ds0/subdirectory/subdirectory2/file1
+Current List of Files : [/file3 /subdirectory/file1 /subdirectory/file2 /subdirectory/subdirectory2/file1]
+"http://127.0.0.1:2235/register"
+Registration Response: {"files":[]}
+Registration Complete, Sending Files for Deletion {"files":[]}
+Decoded =   {[]}
+Storage: Deleting these file from /tmp/ds0:{[]}Empty Directory List : []
+Listening on  127.0.0.1:2233
+Listening on  127.0.0.1:2234
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Client Requested File Information for : %v
+ /tmp/ds0/subdirectory/file2
+Storage Size Response: {0}
+Storage Server Response: {IllegalArgumentException No arguments passed in the API request body}
+Storage: New SR Request: {/absent 0 0}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage: New SR Request: {/subdirectory 0 0}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage: New SR Request: {/subdirectory/file2 0 0}
+Storage Read Response: {}
+Storage: New SR Request: { 0 0}
+Storage Server Response: {IllegalArgumentException No arguments passed in the API request body}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage Server Response: {IllegalArgumentException No arguments passed in the API request body}
+Storage: Request Body: {/subdirectory/file1 0 dGVzdCBkYXRh}
+Storage Write Response: {true}
+Client Requested File Information for : %v
+ /tmp/ds0/subdirectory/file1
+Storage Size Response: {9}
+Storage: New SR Request: {/subdirectory/file1 0 9}
+Storage Read Response: {dGVzdCBkYXRh}
+Storage: New SR Request: {/subdirectory/file1 -1 10}
+Storage Response: {IndexOutOfBoundsException Invalid Offset value supplied in Storage Write Request}
+Storage: New SR Request: {/subdirectory/file1 0 10}
+Storage Response: {IndexOutOfBoundsException Invalid Offset value supplied in Storage Write Request}
+Storage: New SR Request: {/subdirectory/file1 9 9}
+Storage Response: {IndexOutOfBoundsException Invalid Offset value supplied in Storage Write Request}
+Storage: New SR Request: {/subdirectory/file1 0 -9}
+Storage Response: {IndexOutOfBoundsException Invalid Offset value supplied in Storage Write Request}
+Storage Response: {IndexOutOfBoundsException Invalid Offset value supplied in Storage Write Request}
+Storage: Request Body: {/subdirectory/file1 10 dGVzdCBkYXRh}
+Storage Write Response: {true}
+Client Requested File Information for : %v
+ /tmp/ds0/subdirectory/file1
+Storage Size Response: {19}
+Storage Server is starting
+[2233 2234 2235 /tmp/ds0]
+Storage: Sending HTTP Request
+Found File : /tmp/ds0/file3
+Found File : /tmp/ds0/subdirectory/file1
+Found File : /tmp/ds0/subdirectory/file2
+Found File : /tmp/ds0/subdirectory/subdirectory2/file1
+Current List of Files : [/file3 /subdirectory/file1 /subdirectory/file2 /subdirectory/subdirectory2/file1]
+"http://127.0.0.1:2235/register"
+Registration Response: {"files":[]}
+Registration Complete, Sending Files for Deletion {"files":[]}
+Decoded =   {[]}
+Storage: Deleting these file from /tmp/ds0:{[]}Empty Directory List : []
+Listening on  127.0.0.1:2233
+Listening on  127.0.0.1:2234
+Storage Server Response: {IllegalArgumentException No arguments passed in the API request body}
+Storage: Error Creating New File: File with same name already exists
+Storage Create Response: {false}
+Storage: Error Creating New File: File with same name already exists
+Storage Create Response: {false}
+Storage Create Response: {true}
+Storage: New SR Request: {/dir/dir/file 0 0}
+Storage Read Response: {}
+Storage: Request Body: {/dir/dir/file 0 dGVzdA==}
+Storage Write Response: {true}
+Storage Create Response: {true}
+Storage: New Delete Request: {}
+Storage Server Response: {IllegalArgumentException No arguments passed in the API request body}
+Storage: New Delete Request: {/}
+Storage: Error Deleting File: remove /tmp/ds0: directory not empty
+Empty Directory List : []
+Storage Delete Response: {false}
+Storage: New Delete Request: {/absent-file}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage: New Delete Request: {/file3}
+Empty Directory List : []
+Storage Delete Response: {true}
+Storage: New Delete Request: {/subdirectory}
+Empty Directory List : []
+Storage Delete Response: {true}
+Storage Server is starting
+[2233 2234 2235 /tmp/ds0]
+Storage: Sending HTTP Request
+Found File : /tmp/ds0/file4
+Current List of Files : [/file4]
+"http://127.0.0.1:2235/register"
+Registration Response: {"files":[]}
+Registration Complete, Sending Files for Deletion {"files":[]}
+Decoded =   {[]}
+Storage: Deleting these file from /tmp/ds0:{[]}Empty Directory List : []
+Listening on  127.0.0.1:2233
+Listening on  127.0.0.1:2234
+Storage Server is starting
+[3333 3334 2235 /tmp/ds1]
+Storage: Sending HTTP Request
+Found File : /tmp/ds1/file4
+Found File : /tmp/ds1/replicate/file5
+Current List of Files : [/file4 /replicate/file5]
+"http://127.0.0.1:2235/register"
+Registration Response: {"files":[]}
+Registration Complete, Sending Files for Deletion {"files":[]}
+Decoded =   {[]}
+Storage: Deleting these file from /tmp/ds1:{[]}Empty Directory List : []
+Listening on  127.0.0.1:3333
+Listening on  127.0.0.1:3334
+Storage: New Copy Request: { http://127.0.0.1: 3333}
+Storage Server Response: {IllegalArgumentException No arguments passed in the API request body}
+Storage: New Copy Request: {/absent-file http://127.0.0.1: 3333}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage Size Response: {"exception_type":"FileNotFoundException","exception_info":"The file does not exist on storage server"}
+
+Storage Size Response Code: 404
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage: New Copy Request: {/replicate http://127.0.0.1: 3333}
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage Size Response: {"exception_type":"FileNotFoundException","exception_info":"The file does not exist on storage server"}
+
+Storage Size Response Code: 404
+Storage Response: {FileNotFoundException The file does not exist on storage server}
+Storage: Request Body: {/replicate/file5 0 ZGF0YQ==}
+Storage Write Response: {true}
+Storage: New Copy Request: {/replicate/file5 http://127.0.0.1: 3333}
+Client Requested File Information for : %v
+ /tmp/ds1/replicate/file5
+Storage Size Response: {4}
+Storage Size Response: {"size":4}
+
+Storage Size Response Code: 200
+Storage: New SR Request: {/replicate/file5 0 4}
+Storage Read Response: {ZGF0YQ==}
+Storage: Response Body: {ZGF0YQ==}
+Storage: Response base64RequestString: data
+Storage: Response Normal String: data
+Empty Directory List : []
+Storage: Creating/Overwriting File /tmp/ds0/replicate/file5
+Storage Copy Response: {true}
+Client Requested File Information for : %v
+ /tmp/ds0/replicate/file5
+Storage Size Response: {4}
+Storage: New SR Request: {/replicate/file5 0 4}
+Storage Read Response: {ZGF0YQ==}
+Storage: Request Body: {/file4 0 b2xkIGRhdGE=}
+Storage Write Response: {true}
+Storage: Request Body: {/file4 0 ZGF0YQ==}
+Storage Write Response: {true}
+Storage: New Copy Request: {/file4 http://127.0.0.1: 3333}
+Client Requested File Information for : %v
+ /tmp/ds1/file4
+Storage Size Response: {4}
+Storage Size Response: {"size":4}
+
+Storage Size Response Code: 200
+Storage: New SR Request: {/file4 0 4}
+Storage Read Response: {ZGF0YQ==}
+Storage: Response Body: {ZGF0YQ==}
+Storage: Response base64RequestString: data
+Storage: Response Normal String: data
+Storage: File /tmp/ds0/file4 already existed, removing ... :
+Empty Directory List : []
+Storage: Creating/Overwriting File /tmp/ds0/file4
+Storage Copy Response: {true}
+Client Requested File Information for : %v
+ /tmp/ds0/file4
+Storage Size Response: {4}
+Storage: New SR Request: {/file4 0 4}
+Storage Read Response: {ZGF0YQ==}

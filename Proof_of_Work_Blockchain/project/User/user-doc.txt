@@ -1,0 +1,54 @@
+package user // import "project/User"
+
+
+CONSTANTS
+
+const CONTENT string = "/content"
+const numOfNodes int = 1 // Number of nodes to send to
+
+VARIABLES
+
+var NODE_LIST string
+var USER_LIST string
+var registration_mutex sync.Mutex
+
+FUNCTIONS
+
+func RandomSet(start int, end int, count int) []int
+    Return a set of random numbers that are chosen from a range, without any
+    repeating numbers in the set.
+
+    Inputs define the range and the number of random numbers to generate
+
+
+TYPES
+
+type Content struct {
+	Content string `json:"content"`
+	User    User   `json:"user"`
+}
+
+type User struct {
+	Port string `json:"port"`
+	Name string `json:"name"`
+}
+
+func (user *User) IsUserRegistered() bool
+    Returns true if the user is registered on the UserList
+
+func (user *User) RegisterUser(UserList string, NodeList string)
+    RegisterUser a user to the given user list. Must be thread safe.
+
+    Limitation: Registration is required so users can be distinguished and
+    only known users can send content to the blockchain. Usually, a blockchain
+    would use a Private/Public key infrastructure to track user's across time
+    (for example, when counting wallet amounts). Instead, we use a simple
+    registration file on our local machine. This file is accessible by nodes who
+    check if the user is on the list before accepting their content.
+
+func (user *User) SendContent(content string) bool
+    A user can send content (as a string) to a random set of nodes.
+
+func (user *User) SendContentToNode(random_port string, content string) bool
+    Send an http request containing content to a single node.
+

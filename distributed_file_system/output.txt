@@ -1,0 +1,1930 @@
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+
+---------------Received /is_valid_path command---------------
+Invalid path:{}
+
+---------------Received /is_valid_path command---------------
+Invalid path:{some-file}
+
+---------------Received /is_valid_path command---------------
+Invalid path:{hostname:path}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+Appending location file{}
+Appending location file{}
+Appending location another_file{}
+Appending location file{}
+Appending location another_file{}
+Appending location another_file{}
+Appending location {}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+Appending location file{}
+Appending location file{}
+Appending location another_file{}
+
+---------------Received /is_directory command---------------
+Invalid path:{}
+Sending: &{0xc00018a000 0xc0001a0000 0xc00019e080 0x4e81e0 true false false false {{} 0} {0 0} 0xc00019e0c0 {0xc0001ae000 map[Content-Type:[application/json]] false false} map[Content-Type:[application/json]] true 0 -1 404 false false [] {{} 0} [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0] [0 0 0] 0xc0001ac000 {{} 0}}
+
+---------------Received /list command---------------
+Invalid path: {}
+
+---------------Received /is_directory command---------------
+Sending: &{0xc00018a360 0xc0001a0100 0xc00019e180 0x4e81e0 true false false false {{} 0} {0 0} 0xc00019e0c0 {0xc0001ae1c0 map[Content-Type:[application/json]] false false} map[Content-Type:[application/json]] true 0 -1 404 false false [] {{} 0} [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0] [0 0 0] 0xc0001ac070 {{} 0}}
+
+---------------Received /list command---------------
+
+---------------Received /list command---------------
+File is not Directory: {/file}
+
+---------------Received /is_directory command---------------
+Location {/} Exists!
+
+---------------Received /list command---------------
+Files at / are: [file directory]
+---------------Received /is_directory command---------------
+Not a directory!: {//file}
+
+---------------Received /is_directory command---------------
+Location {//directory} Exists!
+
+---------------Received /list command---------------
+Files at /directory are: [file another_file]
+---------------Received /is_directory command---------------
+Not a directory!: {/directory/file}
+
+---------------Received /is_directory command---------------
+Not a directory!: {/directory/another_file}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+Appending location file{}
+
+---------------Received /create_directory command---------------
+
+---------------Received /create_directory command---------------
+File Not Found: {/directory2/subdirectory}
+
+---------------Received /create_directory command---------------
+File Not Found: {/directory/file/directory}
+
+---------------Received /create_directory command---------------
+Directory already exists!: {/directory}
+
+---------------Received /create_directory command---------------
+Directory already exists!: {/directory/file}
+
+---------------Received /create_directory command---------------
+Directory already exists!: {/}
+
+---------------Received /create_file command---------------
+Invalid path: {}
+
+---------------Received /create_file command---------------
+
+---------------Received /create_file command---------------
+
+---------------Received /create_file command---------------
+
+---------------Received /create_file command---------------
+
+---------------Received /create_file command---------------
+
+---------------Received /create_directory command---------------
+Appending location subdirectory{}
+
+---------------Received /is_directory command---------------
+Location {/directory/subdirectory} Exists!
+
+---------------Received /create_directory command---------------
+Appending location another_directory{}
+
+---------------Received /is_directory command---------------
+Location {/another_directory} Exists!
+
+---------------Received /create_file command---------------
+Appending location file{}
+Sent request to storage server: &{POST http://localhost:50499/storage_create HTTP/1.1 1 1 map[Content-Type:[application/json]] {} 0x63ec60 16 [] false localhost:50499 map[] map[] <nil> map[]   <nil> <nil> <nil> 0xc0000180a8}
+---------------Received /is_directory command---------------
+Not a directory!: {/file}
+
+---------------Received /create_file command---------------
+Appending location file{}
+Sent request to storage server: &{POST http://localhost:50499/storage_create HTTP/1.1 1 1 map[Content-Type:[application/json]] {} 0x63ec60 34 [] false localhost:50499 map[] map[] <nil> map[]   <nil> <nil> <nil> 0xc0000180a8}
+---------------Received /is_directory command---------------
+Not a directory!: {/another_directory/file}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+Appending location file1{}
+Appending location file2{}
+Appending location file3{}
+Appending location file4{}
+
+---------------Received /get_storage command---------------
+
+---------------Received /get_storage command---------------
+Location not found: {/another_file}
+
+---------------Received /get_storage command---------------
+Location not found: {/directory}
+
+---------------Received /get_storage command---------------
+Storage 50522 owns /file1
+---------------Received /get_storage command---------------
+Storage 50522 owns /directory/file2
+---------------Received /get_storage command---------------
+Storage 50524 owns /directory/file3
+---------------Received /get_storage command---------------
+Storage 50524 owns /another_directory/file4
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+Appending location file1{}
+Appending location file2{}
+
+---------------Received /lock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+Location not found: {/another_file false 0}
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+Successfully locked!
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 3} to Queue
+
+Midway location / has New Read Lock appended
+
+Added lock{directory false 1} to Queue
+
+Midway location directory has New Read Lock appended
+Successfully locked!
+
+---------------Received /lock command---------------
+
+Added lock{/ false 4} to Queue
+
+Midway location / has New Read Lock appended
+
+Added lock{directory false 2} to Queue
+
+Midway location directory has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Found owner: 50584
+Sending /storage_delete here
+Found owner: 50584
+
+---------------Received /lock command---------------
+
+Added lock{/ false 5} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /lock command---------------
+
+Added lock{/ false 6} to Queue
+
+Midway location / has New Read Lock appended
+
+Added lock{directory false 4} to Queue
+
+Midway location directory has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Found owner: 50584
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+Successfully locked!
+
+---------------Received /lock command---------------
+
+---------------Received /unlock command---------------
+Successfully locked!
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+
+---------------Received /lock command---------------
+Successfully locked!
+
+---------------Received /lock command---------------
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+Successfully locked!
+
+---------------Received /lock command---------------
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Successfully locked!
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+
+---------------Received /lock command---------------
+Successfully locked!
+
+---------------Received /lock command---------------
+Waiting for / to be free...
+---------------Received /unlock command---------------
+Sending /storage_delete here
+
+Added lock{/ false 14} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 15} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /lock command---------------
+
+---------------Received /unlock command---------------
+Successfully locked!
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+
+---------------Received /lock command---------------
+
+Added lock{/ false 17} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /lock command---------------
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Successfully locked!
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+
+---------------Received /lock command---------------
+Successfully locked!
+
+---------------Received /lock command---------------
+Successfully locked!
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+Successfully locked!
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Successfully locked!
+Successfully locked!
+Successfully locked!
+Successfully locked!
+Successfully locked!
+Successfully locked!
+Successfully locked!
+Successfully locked!
+Successfully locked!
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+Successfully locked!
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Successfully locked!
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+Appending location file{}
+
+---------------Received /lock command---------------
+
+Added lock{/ false 1} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 2} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 3} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 4} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 5} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 6} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 7} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 8} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 9} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 10} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 11} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 12} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 13} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 14} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 15} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 16} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 17} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 18} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 19} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 20} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 21} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 22} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 23} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 24} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 25} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 26} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 27} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 28} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 29} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 30} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 31} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Found owner: 50663
+Sent /storage_delete to 50666
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+Appending location file{}
+Appending location file{}
+Appending location file2{}
+
+---------------Received /delete command---------------
+Invalid path: {}
+
+---------------Received /delete command---------------
+Location not found: {/another_file}
+
+---------------Received /lock command---------------
+
+Added lock{/ false 1} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 2} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 3} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 4} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 5} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 6} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 7} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 8} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 9} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 10} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 11} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 12} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 13} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 14} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 15} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 16} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 17} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 18} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 19} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 20} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 21} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 22} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 23} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 24} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 25} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 26} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 27} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 28} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 29} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 30} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /delete command---------------
+Sending /storage_delete here
+Found owner: 50735
+Sent /storage_delete to 50735
+Sent /storage_delete to 50738
+
+---------------Received /delete command---------------
+Sending /storage_delete here
+Sent /storage_delete to 50735
+Sent /storage_delete to 50738
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+
+---------------Received /is_valid_path command---------------
+Invalid path:{}
+
+---------------Received /is_valid_path command---------------
+Invalid path:{some-file}
+
+---------------Received /is_valid_path command---------------
+Invalid path:{hostname:path}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+Appending location file{}
+Appending location file{}
+Appending location another_file{}
+Appending location file{}
+Appending location another_file{}
+Appending location another_file{}
+Appending location {}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+Appending location file{}
+Appending location file{}
+Appending location another_file{}
+
+---------------Received /is_directory command---------------
+Invalid path:{}
+Sending: &{0xc00007c480 0xc000102300 0xc000068380 0x4e81e0 true false false false {{} 0} {0 0} 0xc0000681c0 {0xc00011a0e0 map[Content-Type:[application/json]] false false} map[Content-Type:[application/json]] true 0 -1 404 false false [] {{} 0} [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0] [0 0 0] 0xc0000660e0 {{} 0}}
+
+---------------Received /list command---------------
+Invalid path: {}
+
+---------------Received /is_directory command---------------
+Sending: &{0xc00007c7e0 0xc000102400 0xc000068440 0x4e81e0 true false false false {{} 0} {0 0} 0xc0000681c0 {0xc00011a2a0 map[Content-Type:[application/json]] false false} map[Content-Type:[application/json]] true 0 -1 404 false false [] {{} 0} [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0] [0 0 0] 0xc000066150 {{} 0}}
+
+---------------Received /list command---------------
+
+---------------Received /list command---------------
+File is not Directory: {/file}
+
+---------------Received /is_directory command---------------
+Location {/} Exists!
+
+---------------Received /list command---------------
+Files at / are: [file directory]
+---------------Received /is_directory command---------------
+Not a directory!: {//file}
+
+---------------Received /is_directory command---------------
+Location {//directory} Exists!
+
+---------------Received /list command---------------
+Files at /directory are: [file another_file]
+---------------Received /is_directory command---------------
+Not a directory!: {/directory/file}
+
+---------------Received /is_directory command---------------
+Not a directory!: {/directory/another_file}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+Appending location file{}
+
+---------------Received /create_directory command---------------
+
+---------------Received /create_directory command---------------
+File Not Found: {/directory2/subdirectory}
+
+---------------Received /create_directory command---------------
+File Not Found: {/directory/file/directory}
+
+---------------Received /create_directory command---------------
+Directory already exists!: {/directory}
+
+---------------Received /create_directory command---------------
+Directory already exists!: {/directory/file}
+
+---------------Received /create_directory command---------------
+Directory already exists!: {/}
+
+---------------Received /create_file command---------------
+Invalid path: {}
+
+---------------Received /create_file command---------------
+
+---------------Received /create_file command---------------
+
+---------------Received /create_file command---------------
+
+---------------Received /create_file command---------------
+
+---------------Received /create_file command---------------
+
+---------------Received /create_directory command---------------
+Appending location subdirectory{}
+
+---------------Received /is_directory command---------------
+Location {/directory/subdirectory} Exists!
+
+---------------Received /create_directory command---------------
+Appending location another_directory{}
+
+---------------Received /is_directory command---------------
+Location {/another_directory} Exists!
+
+---------------Received /create_file command---------------
+Appending location file{}
+Sent request to storage server: &{POST http://localhost:53137/storage_create HTTP/1.1 1 1 map[Content-Type:[application/json]] {} 0x63ec60 16 [] false localhost:53137 map[] map[] <nil> map[]   <nil> <nil> <nil> 0xc0000180a8}
+---------------Received /is_directory command---------------
+Not a directory!: {/file}
+
+---------------Received /create_file command---------------
+Appending location file{}
+Sent request to storage server: &{POST http://localhost:53137/storage_create HTTP/1.1 1 1 map[Content-Type:[application/json]] {} 0x63ec60 34 [] false localhost:53137 map[] map[] <nil> map[]   <nil> <nil> <nil> 0xc0000180a8}
+---------------Received /is_directory command---------------
+Not a directory!: {/another_directory/file}
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+Appending location file1{}
+Appending location file2{}
+Appending location file3{}
+Appending location file4{}
+
+---------------Received /get_storage command---------------
+
+---------------Received /get_storage command---------------
+Location not found: {/another_file}
+
+---------------Received /get_storage command---------------
+Location not found: {/directory}
+
+---------------Received /get_storage command---------------
+Storage 53160 owns /file1
+---------------Received /get_storage command---------------
+Storage 53160 owns /directory/file2
+---------------Received /get_storage command---------------
+Storage 53162 owns /directory/file3
+---------------Received /get_storage command---------------
+Storage 53162 owns /another_directory/file4
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+Appending location file1{}
+Appending location file2{}
+
+---------------Received /lock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+Location not found: {/another_file false 0}
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+Successfully locked!
+
+---------------Received /lock command---------------
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 3} to Queue
+
+Midway location / has New Read Lock appended
+
+Added lock{directory false 1} to Queue
+
+Midway location directory has New Read Lock appended
+Successfully locked!
+
+---------------Received /lock command---------------
+
+Added lock{/ false 4} to Queue
+
+Midway location / has New Read Lock appended
+
+Added lock{directory false 2} to Queue
+
+Midway location directory has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Found owner: 53221
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Found owner: 53221
+
+---------------Received /lock command---------------
+
+Added lock{/ false 5} to Queue
+
+Midway location / has New Read Lock appended
+
+Added lock{directory false 3} to Queue
+
+Midway location directory has New Read Lock appended
+Successfully locked!
+
+---------------Received /lock command---------------
+
+Added lock{/ false 6} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Found owner: 53221
+
+---------------Received /lock command---------------
+Successfully locked!
+
+---------------Received /lock command---------------
+
+---------------Received /unlock command---------------
+Successfully locked!
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+
+---------------Received /lock command---------------
+Successfully locked!
+
+---------------Received /lock command---------------
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+Successfully locked!
+
+---------------Received /lock command---------------
+
+---------------Received /unlock command---------------
+Successfully locked!
+Sending /storage_delete here
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+
+---------------Received /lock command---------------
+Successfully locked!
+
+---------------Received /lock command---------------
+Waiting for / to be free...
+---------------Received /unlock command---------------
+Sending /storage_delete here
+
+Added lock{/ false 14} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 15} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /lock command---------------
+
+---------------Received /unlock command---------------
+Successfully locked!
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+
+---------------Received /lock command---------------
+
+Added lock{/ false 17} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /lock command---------------
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Successfully locked!
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+
+---------------Received /lock command---------------
+Successfully locked!
+
+---------------Received /lock command---------------
+Successfully locked!
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /lock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+Successfully locked!
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Successfully locked!
+Successfully locked!
+Successfully locked!
+Successfully locked!
+Successfully locked!
+Successfully locked!
+Successfully locked!
+Successfully locked!
+Successfully locked!
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+Successfully locked!
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Successfully locked!
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /unlock command---------------
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+Appending location file{}
+
+---------------Received /lock command---------------
+
+Added lock{/ false 1} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 2} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 3} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 4} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 5} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 6} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 7} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 8} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 9} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 10} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 11} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 12} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 13} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 14} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 15} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 16} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 17} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 18} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 19} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 20} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 21} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 22} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 23} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 24} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 25} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 26} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 27} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 28} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 29} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 30} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 31} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+Sending /storage_delete here
+Found owner: 53300
+Sent /storage_delete to 53303
+
+----------------------------**Starting a NamingServer**----------------------------
+Listening on 127.0.0.1:4444 for Service Requests...
+Appending location file{}
+Appending location file{}
+Appending location file2{}
+
+---------------Received /delete command---------------
+Invalid path: {}
+
+---------------Received /delete command---------------
+Location not found: {/another_file}
+
+---------------Received /lock command---------------
+
+Added lock{/ false 1} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 2} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 3} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 4} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 5} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 6} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 7} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 8} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 9} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 10} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 11} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 12} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 13} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 14} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 15} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 16} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 17} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 18} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 19} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 20} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 21} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 22} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 23} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 24} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 25} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 26} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 27} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 28} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 29} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /lock command---------------
+
+Added lock{/ false 30} to Queue
+
+Midway location / has New Read Lock appended
+Successfully locked!
+
+---------------Received /unlock command---------------
+
+---------------Received /delete command---------------
+Sending /storage_delete here
+Found owner: 53374
+Sent /storage_delete to 53374
+Sent /storage_delete to 53377
+
+---------------Received /delete command---------------
+Sending /storage_delete here
+Sent /storage_delete to 53374
+Sent /storage_delete to 53377

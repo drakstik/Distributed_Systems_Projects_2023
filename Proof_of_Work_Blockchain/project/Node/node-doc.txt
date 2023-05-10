@@ -1,0 +1,124 @@
+package node // import "project/Node"
+
+
+CONSTANTS
+
+const CONTENT string = "/content"
+const COPY_CHAIN string = "/copy_chain"
+const LOCALHOST string = "http://localhost:"
+const LOCALHOST_IP string = "127.0.0.1:"
+const NEW_CHAIN string = "/new_chain"
+const PROTOCOL string = "tcp"
+const VALIDATE string = "/validate"
+
+VARIABLES
+
+var NODE_LIST string
+var OUT os.File
+    Output files for logs
+
+var USER_LIST string
+var registration_mutex sync.Mutex
+var wait10_time time.Duration = 10 * time.Millisecond
+
+FUNCTIONS
+
+func GetBlockchain(filepath string) (bool, bc.Blockchain)
+    Send /copychain to all known ports and return the majority blockchain.
+
+func PrintBlockchain(blockchain bc.Blockchain)
+    Print a given blockchain
+
+
+TYPES
+
+type Node struct {
+	Port       string
+	Blockchain bc.Blockchain
+	Listener   net.Listener
+	Running    bool
+
+	Validated []blk.Block
+
+	Acceptance_mu *sync.Mutex
+}
+    A Node is referenced to by its port and holds a copy of the blockchain.
+
+    It is in charge of listening for users and peers, and handling their
+    requests according to the agreed upon Proof of Work consensus protocol.
+
+    Nodes first registers to the network before they can validate blocks to the
+    blockchain.
+
+func (node *Node) AcceptBlock(newBlock blk.Block, i int) bool
+    This function requests peers to accept a block, if majority of peers accept
+    it, this node too can accept it.
+
+func (node *Node) BroadcastNewChain(known_ports []string, chain *bc.Blockchain) bool
+    Send the new chain to all peers
+
+func (node *Node) FindLongestBranch() blk.Block
+    Get the block with the highest index in the node's list of validated blocks.
+
+func (node *Node) HandleRequests(w http.ResponseWriter, r *http.Request)
+    This function handles requests to the node. Depending on the URI, another
+    function will be called to handle the request made by either a user or a
+    peer.
+
+func (node *Node) IsDoubleSpend(block blk.Block) bool
+    Return true if the block is already in the chain, else false.
+
+func (node *Node) MineContent(content string) bool
+    Mine content into a block with a PoW, then accept the block once majority of
+    peers accept it.
+
+    The mining can get interrupted by a block sent by a peer. In that case,
+    cease mining, validate the block. If the block is valid, then stop mining,
+    if it is not valid then continue mining.
+
+    Once the mining ends and node awaits peers to accept the block, then no
+    interruptions are acceptable from validation requests.
+
+    Before mining and a node should update its blockchain to the most recent
+    version.
+
+func (node *Node) MineNewBlock(data string, prevBlockHash []byte, prevIndex int) (bool, *blk.Block)
+    Create and return a new block.
+
+func (node *Node) RegisterNode(NodeList string, UserList string, OUT os.File)
+    Register a node to the blockchain RegisterNode may be called concurrently
+    and should be thread safe.
+
+func (node *Node) RunPoW(pow blk.ProofOfWork) (int, []byte)
+
+func (node *Node) StartListening(out os.File)
+    This function creates an http listener for both users and peers.
+
+func (node *Node) UpdateBlockchain() bool
+    Update this node's blockchain. This function is not thread safe and should
+    be called in a thread safe manner using Acceptance_mu since it updates the
+    blockchain.
+
+func (node *Node) ValidateBlock(block blk.Block, i int) bool
+           Return true if the block is valid and false otherwise.
+
+           A block is valid if:
+        		- it has a valid index,
+        		- it has a valid prevHash,
+        		- its Proof-of-Work is valid and
+        		- the block is not already in the chain.
+
+    Params: When passed 1, ValidateBlock only checks for matching indeces.
+
+func (node *Node) ValidatedBlocksTied() bool
+    Check if this node's validated blocks are tied. If so, return true, else
+    return false.
+
+func (node *Node) acceptValidatedBlock(w http.ResponseWriter, block blk.Block)
+    Accept the given block. Only check if the block was validated for its index.
+
+    If the block's index is invalid, then do not accept and respond with a 403.
+    If block's index is greater than the blockchain's last index + 1, then block
+    was sent to be validated with a skipped index, then node should update
+    blockchain.
+

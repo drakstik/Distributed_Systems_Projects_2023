@@ -1,0 +1,144 @@
+
+
+CONSTANTS
+
+const FILE_PERMISSIONS = 0644
+const NAMING_SERVER_IP string = "http://127.0.0.1:"
+const PROTOCOL string = "tcp"
+const REGISTRATION_API_ENDPOINT string = "/register"
+    API Endpoints
+
+const STORAGE_COPY_API_ENDPOINT string = "/storage_copy"
+const STORAGE_CREATE_API_ENDPOINT string = "/storage_create"
+const STORAGE_DELETE_API_ENDPOINT string = "/storage_delete"
+const STORAGE_IP string = "http://127.0.0.1:"
+const STORAGE_READ_API_ENDPOINT string = "/storage_read"
+const STORAGE_SIZE_API_ENDPOINT string = "/storage_size"
+const STORAGE_WRITE_API_ENDPOINT string = "/storage_write"
+
+VARIABLES
+
+var STORAGE_OUT os.File
+
+FUNCTIONS
+
+func isDirEmpty(dirname string) bool
+func main()
+    Start the Storage Server
+
+
+TYPES
+
+type ExceptionResponse struct {
+	ExceptionType string `json:"exception_type"`
+	ExceptionInfo string `json:"exception_info"`
+}
+
+type FileList struct {
+	Files []string `json:"files"`
+}
+
+type RegisterRequest struct {
+	Storage_IP  string   `json:"storage_ip"`
+	ClientPort  string   `json:"client_port"`
+	CommandPort string   `json:"command_port"`
+	Files       []string `json:"files"`
+}
+
+type StorageCopyRequest struct {
+	Path       string `json:"path"`
+	ServerIP   string `json:"server_ip"`
+	ServerPort int    `json:"server_port"`
+}
+
+type StorageCopyResponse struct {
+	Success bool `json:"success"`
+}
+
+type StorageCreateRequest struct {
+	Path string `json:"path"`
+}
+
+type StorageCreateResponse struct {
+	Success bool `json:"success"`
+}
+
+type StorageDeleteRequest struct {
+	Path string `json:"path"`
+}
+
+type StorageDeleteResponse struct {
+	Success bool `json:"success"`
+}
+
+type StorageReadRequest struct {
+	Path   string `json:"path"`
+	Offset int    `json:"offset"`
+	Length int    `json:"length"`
+}
+
+type StorageReadResponse struct {
+	Data string `json:"data"`
+}
+
+type StorageServer struct {
+	clientPort       string
+	commandPort      string
+	registrationPort string
+	root             string
+}
+
+func (storageServer *StorageServer) DeleteFiles(fileList FileList)
+    Delete Files as directed by Naming Server
+
+func (storageServer *StorageServer) HandleHTTPRequest(w http.ResponseWriter, r *http.Request)
+
+func (storageServer *StorageServer) HandleInvalidRequestParams(
+	w http.ResponseWriter,
+	r *http.Request,
+	path string,
+	offset int,
+	readLength int,
+	API string) bool
+
+func (storageServer *StorageServer) HandleStorageCopyRequest(w http.ResponseWriter, r *http.Request)
+
+func (storageServer *StorageServer) HandleStorageCreateRequest(w http.ResponseWriter, r *http.Request)
+
+func (storageServer *StorageServer) HandleStorageDeleteRequest(w http.ResponseWriter, r *http.Request)
+
+func (storageServer *StorageServer) HandleStorageReadRequest(w http.ResponseWriter, r *http.Request)
+
+func (storageServer *StorageServer) HandleStorageSizeRequest(w http.ResponseWriter, r *http.Request)
+
+func (storageServer *StorageServer) HandleStorageWriteRequest(w http.ResponseWriter, r *http.Request)
+
+func (storageServer *StorageServer) RecursivelyDeleteEmptyDirs()
+
+func (storageServer *StorageServer) Register()
+
+func (storageServer *StorageServer) ServeClient(clientListener *net.Listener)
+
+func (storageServer *StorageServer) ServeCommand(commandListener *net.Listener)
+
+func (storageServer *StorageServer) Start()
+    Start the Storage Server
+
+type StorageSizeRequest struct {
+	Path string `json:"path"`
+}
+
+type StorageSizeResponse struct {
+	Size int `json:"size"`
+}
+
+type StorageWriteRequest struct {
+	Path   string `json:"path"`
+	Offset int    `json:"offset"`
+	Data   string `json:"data"`
+}
+
+type StorageWriteResponse struct {
+	Success bool `json:"success"`
+}
+

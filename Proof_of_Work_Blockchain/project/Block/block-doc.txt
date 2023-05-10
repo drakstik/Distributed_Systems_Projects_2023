@@ -1,0 +1,60 @@
+package block // import "project/Block"
+
+
+CONSTANTS
+
+const DIFFICULTY = 18 // Current difficulty
+    target bits in BTC is the difficulty level. This constant is
+    used in calculating the hex representation of the target.
+    In this demo, difficulty is 24 which would look like this in hex ->
+    0x10000000000000000000000000000000000000000000000000000000000
+
+
+FUNCTIONS
+
+func IntToHex(num int64) []byte
+    IntToHex converts an int64 to a byte array
+
+
+TYPES
+
+type Block struct {
+	PrevBlockHash []byte `json:"prev_hash"`
+	Index         int    `json:"index"`
+
+	Timestamp int64  `json:"timestamp"`
+	Content   []byte `json:"data"`
+
+	Nonce    int    `json:"nonce"`
+	SelfHash []byte `json:"hash"`
+}
+
+func NewBlock(content string, prevBlockHash []byte, prevIndex int) *Block
+    Create and return a new block
+
+func (b *Block) SetHash()
+    Set this block's hash
+
+func (block *Block) Validate() bool
+    Turn the block into a PoW, then validate it.
+
+type ProofOfWork struct {
+	Block  *Block
+	Target *big.Int
+}
+
+func NewProofOfWork(b *Block) *ProofOfWork
+    Turns a block into a proof of work object that can then be validated.
+
+func (pow *ProofOfWork) MergeBlockNonce(nonce int) []byte
+    Return a block+nonce.
+
+    A block+nonce is a byte array containing all the fields in the pow's block
+    merged with the targetBits and nonce.
+
+func (pow *ProofOfWork) Run() (int, []byte)
+    Run proof of work. Return a nonce and the corresponding hash of the
+    block+nonce
+
+func (pow *ProofOfWork) ValidatePoW() bool
+

@@ -1,0 +1,222 @@
+
+
+CONSTANTS
+
+const CREATE_DIRECTORY string = "/create_directory"
+const CREATE_FILE string = "/create_file"
+const DELETE string = "/delete"
+const GET_STORAGE string = "/get_storage"
+const IS_DIRECTORY string = "/is_directory"
+const IS_VALID_PATH string = "/is_valid_path"
+const LIST string = "/list"
+const LOCK string = "/lock"
+const PROTOCOL string = "tcp"
+    API Commands for Naming Server
+
+const REGISTER string = "/register"
+const UNLOCK string = "/unlock"
+
+VARIABLES
+
+var REGISTRATION_OUT os.File
+var SERVICE_OUT os.File
+    Output files for logs
+
+var access_mu sync.Mutex
+var mu sync.Mutex
+
+FUNCTIONS
+
+func CallStorageCopy(file string)
+    Call storage copy as per API
+
+func ContainsX(parentDirectory []string, x string) bool
+    Returns true if the given parent directory contains a file.
+
+func HandleRegistration(w http.ResponseWriter, r *http.Request)
+    Handler function for http registration requests.
+
+    DANGER NOTE: Registration assumes well behaved storage servers. Registration
+    is best done when there is not heavy usage of the file system.
+
+func HandleServiceCommand(w http.ResponseWriter, r *http.Request)
+    Handler function for http client requests. DANGER NOTE: Registration assumes
+    well behaved clients.
+
+func Increment_Access_Count(file string)
+    Increment the access count. Create the map entry if it does not exist Then
+    call /storage_copy on all storage server's except file owner.
+
+    File owner is the storage server that registered with the file.
+
+func IsPathValid(path string) bool
+    return false if path.Path is empty string, doesnt start with delimiter or
+    string contains a colon.
+
+func SendDelete(file string, all bool)
+    Send the delete command to all Storage Servers, but when all == false,
+    send to storage servers that are not the file's owner.
+
+func StartRegistration(serv *NamingServer)
+    Start the NamingServer's Registration Listener and server http requests.
+
+func StartService(serv *NamingServer)
+    Start the NamingServer's Service Listener and handle client http requests.
+
+func main()
+
+TYPES
+
+type ExceptionResponse struct {
+	ExceptionType string `json:"exception_type"`
+	ExceptionInfo string `json:"exception_info"`
+}
+
+type ListSuccessfulResponse struct {
+	Files []string `json:"files"`
+}
+
+type Location struct {
+	name         string      // Location's name
+	subLocations []*Location // Directory or file, distinguished by their name
+	locks        []Lock      // List of locks currently held by location
+
+	/*
+		List of locks currently held and waiting to hold location.
+		All locks are added to this queue in a first-com, first serve fashion.
+	*/
+	lock_queue []Lock
+
+	/* Used to index the locks as they are added to the queue. Only incremented. */
+	num_locks int
+
+	/* Array of EL indeces that are waiting to lock this location */
+	exclusive_locks_waiting []int //
+}
+    Represents a location in the DFS A file or directory are differentiated by
+    name
+
+func (currentLocation *Location) AppendNewLocation(locationNames []string)
+    Create a new path, without worrying about conflicts
+
+func (currentLocation *Location) CheckNewPath(locationNames []string, idx int) bool
+    Returns true if file or directory path does not already exist and creates a
+    new location;
+
+    Return false if path already exists.
+
+func (currentLocation *Location) GetContentsAt(locationNames []string, ret *[]string)
+    Return a list of files found at this Directory location.
+
+func (currentLocation *Location) LocationExists(locationNames []string, ret *bool)
+    Returns true if location already exists; false otherwise. This function
+    expects the input ret to be false.
+
+func (currentLocation *Location) LockLocation(lock Lock, idx int, ret *bool)
+    This function starts at root, navigates to the path in the lock, then locks
+    that location.
+
+    Locations can only be locked if they are not already locked exclusively
+    (write lock), otherwise the lock is queued until location is available for
+    locking.
+
+    A single location can have multiple read locks, but only one write lock at a
+    time.
+
+    When a location gets locked for any kind of access, all objects along the
+    path to that object, including the root directory, must be locked for shared
+    access.
+
+    ret is set to true if this function is successful.
+
+func (currentLocation *Location) Pop(unlock Lock)
+    Pop a lock off this location's queue.
+
+func (l *Location) String() string
+    This is a Helper function used for easy printing of &Location nested in
+    arrays and structs.
+
+func (currentLocation *Location) UnlockLocation(unlock Lock, idx int, ret *bool)
+    This function starts at root, recursively navigates to the path to be
+    unlocked, then unlocks it if it is the correct unlock. Assumes location
+    exists.
+
+    Along the way, it removes a single read lock per midway location, assuming
+    it finds a read lock there.
+
+    ret is set to true if this function is successful.
+
+type Lock struct {
+	PathString  string `json:"path"`
+	Exclusive   bool   `json:"exclusive"`
+	queue_index int
+}
+
+type NamingServer struct {
+
+	/* Is Server running? */
+	running bool
+
+	/* Network listeners */
+	serviceListener net.Listener // For client requests
+	servicePort     string
+
+	// For Storage Server registration requests
+	registrationListener net.Listener
+	registrationPort     string
+
+	/* List of storage servers that registered */
+	registry []StorageServer
+
+	/* Root of DFS directory tree. */
+	root *Location
+
+	/* A map of all files on system and how many times they have been accessed */
+	access_counts map[string]int
+}
+    This is a Naming Server, only one instance NAMING_SERVER is created in the
+    main function, and used throughout this file in managing Client requests and
+    Storage Server registration.
+
+var NAMING_SERVER *NamingServer
+    Global Variables and Constants
+
+func (naming_server *NamingServer) CreateFileOnStorage(path PathRequest) bool
+    This function sends a create file command to the first storage server in
+    NAMING_SERVER's registry.
+
+    Returns true if API call responded with success == true, false otherwise
+
+func (serv *NamingServer) Start()
+    Start a NamingServer.
+
+type PathRequest struct {
+	PathString string `json:"path"`
+}
+
+type RegistrationResponse struct {
+	Files []string `json:"files"`
+}
+
+type ServiceResponse struct {
+	Success bool `json:"success"`
+}
+
+type StorageCopy struct {
+	Path       string `json:"path"`
+	ServerIP   string `json:"server_ip"`
+	ServerPort int    `json:"server_port"`
+}
+
+type StorageInfo struct {
+	ServerIP   string `json:"server_ip"`
+	ServerPort int    `json:"server_port"`
+}
+
+type StorageServer struct {
+	StorageIP   string   `json:"storage_ip"`
+	ClientPort  int      `json:"client_port"`
+	CommandPort int      `json:"command_port"`
+	Files       []string `json:"files"`
+}
+

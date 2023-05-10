@@ -1,0 +1,22 @@
+
+
+CONSTANTS
+
+const NODE_LIST = "/tmp/NodeList.txt"
+    Global Constants
+
+const USER_LIST = "/tmp/UserList.txt"
+
+VARIABLES
+
+var NODE_LIST_MUTEX sync.Mutex
+var OUT os.File
+var USER_LIST_MUTEX sync.Mutex
+var wait_time time.Duration = 2000 * time.Millisecond
+
+FUNCTIONS
+
+func Hello() string
+    Random Function for Sanity Test
+
+func main()
